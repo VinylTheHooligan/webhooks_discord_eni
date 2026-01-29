@@ -1,0 +1,16 @@
+name: Message Discord SWS
+
+on:
+  schedule:
+    - cron: '0 9 * * 1-5'
+  workflow_dispatch:
+    
+jobs:
+  send-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Envoyer message Discord
+        run: |
+          curl -H "Content-Type: application/json" \
+              -d "{\"content\": \"@everyone Bonjour ! N'oubliez pas de signer votre présence sur So We Sign !\", \"allowed_mentions\": {\"parse\": [\"everyone\"]}}" \
+              ${{ secrets.WEBHOOK_URL }}
